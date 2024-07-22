@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/Time.module.css'
 
-const Time = ({ isRunning, onTimeUpdate }) => {
+const Time = ({ isRunning, onTimeUpdate, resetTime }) => {
     const [time, setTime] = useState(0)
 
     useEffect(() => {
@@ -22,6 +22,12 @@ const Time = ({ isRunning, onTimeUpdate }) => {
 
         return () => clearInterval(interval)
     }, [isRunning, onTimeUpdate])
+
+    useEffect(() => {
+        if (resetTime) {
+            setTime(0)
+        }
+    }, [resetTime])
 
     const formatTime = (time) => {
         const seconds = Math.floor(time / 1000)

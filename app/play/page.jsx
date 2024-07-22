@@ -9,12 +9,16 @@ const Game = () => {
     const [isRunning, setIsRunning] = useState(false)
     const [currentIndex, setCurrentIndex] = useState(0)
     const [arrows, setArrows] = useState([])
+    const [resetTime, setResetTime] = useState(false)
 
     const handleStart = () => {
         setIsRunning(true)
         setCurrentIndex(0)
         setScore(0)
         setArrows(generateRandomArrows())
+        setResetTime(true)
+        // Reset the resetTime flag after a short delay
+        setTimeout(() => setResetTime(false), 50)
     }
 
     const handleKeyPress = (key) => {
@@ -35,6 +39,7 @@ const Game = () => {
                 setCurrentIndex(prevIndex => prevIndex + 1)
             }
         } else {
+            // Wrong arrow pressed, reset game
             setCurrentIndex(0)
             setArrows(generateRandomArrows())
         }
@@ -60,21 +65,21 @@ const Game = () => {
     }, [isRunning, currentIndex, arrows])
 
     return (
-      <div className={styles.game}>
-      <h1 className={styles.title}>GOOD OL</h1>
-      <div className={styles.gameContent}>
-          <Time isRunning={isRunning} onTimeUpdate={setScore} />
-          <Arrows arrows={arrows} currentIndex={currentIndex} />
-          <button 
-              className={styles.startButton} 
-              onClick={handleStart} 
-              disabled={isRunning}
-          >
-              Start
-          </button>
-          <p className={styles.score}>Score : {score}</p>
-      </div>
-  </div>
+        <div className={styles.game}>
+            <h1 className={styles.title}>ARROW GAME</h1>
+            <div className={styles.gameContent}>
+                <Time isRunning={isRunning} onTimeUpdate={setScore} resetTime={resetTime} />
+                <Arrows arrows={arrows} currentIndex={currentIndex} />
+                <button 
+                    className={styles.startButton} 
+                    onClick={handleStart} 
+                    disabled={isRunning}
+                >
+                    Start
+                </button>
+                <p className={styles.score}>Score : {score}</p>
+            </div>
+        </div>
     )
 }
 
