@@ -1,22 +1,27 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import styles from '../styles/Time.module.css'
 
-const Time = ({ running }) => {
+const Time = ({ isRunning, onTimeUpdate }) => {
     const [time, setTime] = useState(0)
 
     useEffect(() => {
         let interval
 
-        if (running) {
+        if (isRunning) {
             interval = setInterval(() => {
-                setTime((prevTime) => prevTime + 10)
+                setTime((prevTime) => {
+                    const newTime = prevTime + 10
+                    onTimeUpdate(newTime)
+                    return newTime
+                })
             }, 10)
         } else {
             clearInterval(interval)
         }
 
         return () => clearInterval(interval)
-    }, [running])
+    }, [isRunning, onTimeUpdate])
 
     const formatTime = (time) => {
         const seconds = Math.floor(time / 1000)
@@ -26,7 +31,7 @@ const Time = ({ running }) => {
     }
 
     return (
-        <div>
+        <div className={styles.time}>
             <p>Time: {formatTime(time)}</p>
         </div>
     )

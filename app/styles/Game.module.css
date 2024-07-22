@@ -1,0 +1,40 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.gameContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.startButton {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.startButton:disabled {
+    background-color: #45a049;
+    cursor: not-allowed;
+}
+
+.score {
+    font-size: 1.5rem;
+}

@@ -1,0 +1,21 @@
+.arrows {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.arrow {
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.completed {
+    opacity: 0.5;
+}
+
+.current {
+    background-color: #ffd700;
+    border-radius: 10px;
+    padding: 5px;
+}

@@ -1,22 +1,16 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-
-const Arrows = () => {
-    const arrows = ['⬆️', '⬅️', '➡️', '⬇️', '⬇️']
-    const [randomArrows, setRandomArrows] = useState([])
-
-    useEffect(() => {
-        const shuffled = [...arrows].sort(() => Math.random() - 0.5)
-        setRandomArrows(shuffled)
-    }, [])
-
+import styles from '../styles/Arrows.module.css'
+const Arrows = ({ arrows, currentIndex }) => {
     return (
-        <div>
-            <div style={{ fontSize: '2rem' }}>
-                {randomArrows.map((arrow, index) => (
-                    <span key={index}>{arrow} </span>
-                ))}
-            </div>
+        <div className={styles.arrows}>
+            {arrows.map((arrow, index) => (
+                <span 
+                    key={index} 
+                    className={`${styles.arrow} ${index < currentIndex ? styles.completed : ''} ${index === currentIndex ? styles.current : ''}`}
+                >
+                    {arrow} 
+                </span>
+            ))}
         </div>
     )
 }
